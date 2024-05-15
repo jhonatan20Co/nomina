@@ -1,4 +1,5 @@
 empleados = []
+usuarios_autorizados = ["juan", "jhon"]
 
 def crear_empleado():
     nombre = input("Nombre: ")
@@ -48,26 +49,49 @@ def eliminar_empleado():
     else:
         print("ID de empleado no válido")
 
-# Menú de opciones
+def es_usuario_autorizado():
+    usuario = input("Ingrese su nombre de usuario jhon, juan, gaitan: ")
+    return usuario in usuarios_autorizados
+
+
+#error en el comando de mostar 
 while True:
-    print("\nCRUD nomina")
-    print("1. Crear Empleado")
-    print("2. Mostrar Empleados")
-    print("3. Actualizar Empleado")
-    print("4. Eliminar Empleado")
-    print("5. Salir")
+    if es_usuario_autorizado():
+        usuario = input("Ingrese su nombre de usuario (admin o empleado): ")
+        if usuario == "admin":
+            print("\nCRUD Nómina (Modo Administrador)")
+            print("1. Crear Empleado")
+            print("2. Mostrar Empleados")
+            print("3. Actualizar Empleado")
+            print("4. Eliminar Empleado")
+            print("5. Salir")
 
-    opcion = input("\nSelecciona una opción: ")
+            opcion = input("\nSelecciona una opción: ")
 
-    if opcion == "1":
-        crear_empleado()
-    elif opcion == "2":
-        mostrar_empleados()
-    elif opcion == "3":
-        actualizar_empleado()
-    elif opcion == "4":
-        eliminar_empleado()
-    elif opcion == "5":
-        break
+            if opcion == "1":
+                crear_empleado()
+            elif opcion == "2":
+                mostrar_empleados()
+            elif opcion == "3":
+                actualizar_empleado()
+            elif opcion == "4":
+                eliminar_empleado()
+            elif opcion == "5":
+                break
+            else:
+                print("Opción inválida. Por favor, selecciona una opción válida.")
+        elif usuario == "empleado":
+            print("\nCRUD Nómina (Modo Consulta)")
+            print("1. Mostrar Empleados")
+            print("2. Salir")
+
+            opcion = input("\nSelecciona una opción: ")
+
+            if opcion == "1":
+                mostrar_empleados()
+            elif opcion == "2":
+                break
+            else:
+                print("Opción inválida. Por favor, selecciona una opción válida.")
     else:
-        print("Opción inválida. Por favor, selecciona una opción válida.")
+        print("Usuario no autorizado.")
